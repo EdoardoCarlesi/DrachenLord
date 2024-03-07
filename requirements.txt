@@ -1,8 +1,9 @@
 sounddevice
 scipy
 numpy
-pygame
 streamlit
-pyaudio
+pygame
 wave
 librosa
+streamlit-audiorecorder
+audio-recorder-streamlit

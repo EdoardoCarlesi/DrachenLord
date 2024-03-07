@@ -3,11 +3,16 @@ from scipy.io.wavfile import write
 import numpy as np
 import pygame
 import os
-import pyaudio
+#import p"""y"""audio
 import wave
 import glob
 from time import sleep
 import librosa
+from st_audiorec import st_audiorec
+from audiorecorder import audiorecorder
+import streamlit as st
+from audio_recorder_streamlit import audio_recorder
+
 
 def play_audio(file_path):
     """
@@ -38,10 +43,8 @@ def test():
     print(f'Recording audio: {recording}')
     myrecording = sd.playrec(recording, sample_rate, channels=channels)
 
-
-
+"""
 def record_audio(output_file, duration=5, sample_rate=44100, channels=1, format=pyaudio.paInt16):
-    """
     Record audio and save it to a WAV file.
 
     Parameters:
@@ -53,7 +56,6 @@ def record_audio(output_file, duration=5, sample_rate=44100, channels=1, format=
 
     Returns:
     None
-    """
     p = pyaudio.PyAudio()
 
     try:
@@ -87,7 +89,22 @@ def record_audio(output_file, duration=5, sample_rate=44100, channels=1, format=
     except Exception as e:
         print(f"Error: {e}")
         p.terminate()
+"""
 
+def record_st(duration=5):
+    audio_bytes = st_audiorec()
+    #st.audio(wav_audio, format='audio/wav')
+
+    #audio_bytes = audiorecorder("Click to record", "click to stop", pause_prompt="", key=None)
+    #if len(audio) > 0:
+    #    st.audio(audio.export().read())
+    
+    #audio_bytes = audio_recorder(energy_threshold=(-1.0, 1.0), pause_threshold=duration)
+
+    #if audio_bytes:
+    #    st.audio(audio_bytes, format='audio/wav')
+
+    return audio_bytes
 
 def get_random_audio_file():
     """
@@ -125,11 +142,13 @@ def main(threshold=1, duration=1):
     print(f'Audio file: {audio_file_path}')
     
     # Record microphone input
-    recording = sd.rec(int(sample_rate * block_duration), samplerate=sample_rate, channels=channels, dtype='int16')
-    sd.wait()
-    print(f'Mean: {np.abs(recording).mean()} Threshold: {threshold}')
+    #recording = sd.rec(int(sample_rate * block_duration), samplerate=sample_rate, channels=channels, dtype='int16')
+    #sd.wait()
+    #print(f'Mean: {np.abs(recording).mean()} Threshold: {threshold}')
 
-    # Check if the average amplitude is above the threshold
+    recording = record_st()
+
+    #Check if the average amplitude is above the threshold
     if np.abs(recording).mean() > threshold:
 
         print("Sound detected!")
