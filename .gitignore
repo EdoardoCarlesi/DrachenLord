@@ -1,0 +1,5 @@
+output/*.mp3
+output/*.wav
+*.swp
+__pycache__/
+activate
