@@ -58,8 +58,7 @@ def main():
     #app_mode = st.selectbox("Choose the app mode", [sound_only_page])
     app_sst()
 
-def app_sst(time_delta=5): 
-    
+def app_sst(time_delta=3): 
 
     #chart = st.line_chart(y_axis=(-500, 3000))
 
@@ -86,7 +85,7 @@ def app_sst(time_delta=5):
     sound_tot = 0
     n_sound = 1
 
-    threshold = 1500
+    threshold = 2000
     data = []
 
     while True:
@@ -117,22 +116,21 @@ def app_sst(time_delta=5):
                 sound_tot += chunk_val 
                 n_sound += 1
 
-                data.append(chunk_val)
-
-                if len(data) == 100:
-                    med = np.mean(data)
-                    data = [d - med for d in data]
-                    #chart.line_chart(data)
-                    data = data[50:]
+                #data.append(chunk_val)
+                #if len(data) == 100:
+                #    med = np.mean(data)
+                #    data = [d - med for d in data]
+                #    #chart.line_chart(data)
+                #    data = data[50:]
 
                 if (time_now - time_start) > time_delta:
                     sound_vol = sound_tot/n_sound
                     time_start = time.time()
                     n_sound = 0
                     sound_tot = 0
-
                     this_file = dl.get_random_audio_file()
-                    
+                    print(sound_vol, threshold)
+
                     if sound_vol > threshold:
 
                         print("Sound detected!")
