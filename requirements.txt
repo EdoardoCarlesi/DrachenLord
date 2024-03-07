@@ -3,7 +3,6 @@ scipy
 numpy
 streamlit
 pygame
-wave
 librosa
 av==9.2.0
 pydub==0.25.1
