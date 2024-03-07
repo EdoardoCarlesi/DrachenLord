@@ -8,10 +8,10 @@ import wave
 import glob
 from time import sleep
 import librosa
-from st_audiorec import st_audiorec
-from audiorecorder import audiorecorder
+#from st_audiorec import st_audiorec
+#from audiorecorder import audiorecorder
 import streamlit as st
-from audio_recorder_streamlit import audio_recorder
+#from audio_recorder_streamlit import audio_recorder
 
 
 def play_audio(file_path):
